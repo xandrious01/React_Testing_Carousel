@@ -59,7 +59,7 @@ it("works when you click the left arrow", () => {
   expect(container.querySelector('img[alt="testing image 2"]')).not.toBeInTheDocument();
 });
 
-it("checks that left arrow is disabled on first image", () => {
+it("checks that left arrow is hidden on first image", () => {
   const { container } = render(
     <Carousel
       photos={TEST_IMAGES}
@@ -67,7 +67,21 @@ it("checks that left arrow is disabled on first image", () => {
     />
   );
   const leftArrow = container.querySelector(".bi-arrow-left-circle");
+  expect(container.querySelector('img[alt="testing image 1"]')).toBeInTheDocument();
+  expect(leftArrow).not.toBeInTheDocument();
+});
 
-  expect(container.querySelector('img [alt="testing image 1"]')).toBeInTheDocument();
-
+it("checks that right arrow is hidden on last image", () => {
+  const { container } = render(
+    <Carousel
+      photos={TEST_IMAGES}
+      title="images for testing"
+    />
+  );
+  const rightArrow = container.querySelector(".bi-arrow-right-circle");
+  fireEvent.click(rightArrow);
+  fireEvent.click(rightArrow);
+  expect(container.querySelector('img[alt="testing image 3"]')).toBeInTheDocument();
+  expect(rightArrow).not.toBeInTheDocument();
+  
 });

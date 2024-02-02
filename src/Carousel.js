@@ -4,19 +4,15 @@ import Card from "./Card";
 
  function Carousel({ photos, title }) {
   const [currCardIdx, setCurrCardIdx] = useState(0);
-
-  const currCard = photos[currCardIdx];
-  console.log(currCard);
-  const total = photos.length;
-
-  const [counter, setCounter] = useState(0);
   
+  const currCard = photos[currCardIdx];
+  const total = photos.length;  
 
-  const goForward = () => {
+  const goForward = (e) => {
     setCurrCardIdx((currCardIdx) => currCardIdx + 1);
   }
 
-   const goBackward = () => {
+   const goBackward = (e) => {
     setCurrCardIdx((currCardIdx) => currCardIdx - 1);
   }
 
@@ -28,7 +24,7 @@ import Card from "./Card";
       <div className="Carousel-main">
         <i
           className="bi bi-arrow-left-circle"
-          disable={(currCardIdx === 0) ? "true" : "false"}
+          hidden={currCardIdx === 0 ? "hidden" : null}
           onClick={goBackward}
         />
         <Card
@@ -39,9 +35,10 @@ import Card from "./Card";
         />
         <i
           className="bi bi-arrow-right-circle"
-          disable={(currCardIdx === total - 1) ? "true" : "false"}
+          hidden={currCardIdx === total - 1 ? "hidden" : null}
           onClick={goForward}
         />
+        
       </div>
     </div>
   );
